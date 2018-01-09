@@ -6,13 +6,51 @@
     android:layout_height="match_parent"
     tools:context="com.example.asus.instagramclonefirebase.MainActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/b_signIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="24dp"
+        android:text="Sıgn In"
+        android:textSize="18dp"
+        android:onClick="signIn"
+        app:layout_constraintStart_toStartOf="@+id/edit_pass"
+        app:layout_constraintTop_toBottomOf="@+id/edit_pass" />
+
+    <Button
+        android:id="@+id/b_signUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:text="Sıgn Up"
+        android:textSize="18dp"
+        android:onClick="signUp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/b_signIn"
+        app:layout_constraintStart_toEndOf="@+id/b_signIn" />
+
+    <EditText
+        android:id="@+id/edit_email"
+        android:layout_width="304dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:text="test@gmail.com"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/edit_pass"
+        android:layout_width="296dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:text="123123"
+        android:hint="Password"
+        android:inputType="textPassword|numberPassword"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_email" />
 </android.support.constraint.ConstraintLayout>
