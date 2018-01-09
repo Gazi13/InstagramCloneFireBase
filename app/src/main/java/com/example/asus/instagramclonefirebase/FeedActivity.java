@@ -22,6 +22,8 @@ import java.util.List;
 
 public class FeedActivity extends AppCompatActivity {
 
+    //Lists for data from FireBase
+    //FireBase den aldığımız verileri tutmak için
     ArrayList<String> userEmailFromFB;
     ArrayList<String> userCommentFromFB;
     ArrayList<String> userImageFromFB;
@@ -31,6 +33,7 @@ public class FeedActivity extends AppCompatActivity {
     ListView listView;
 
     //Üst menu tanımlama !?
+    //Options menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -40,6 +43,7 @@ public class FeedActivity extends AppCompatActivity {
     }
 
     //Menuden işlem seçme
+    //Select from options menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId()== R.id.add_post){
@@ -55,6 +59,7 @@ public class FeedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
 
+
         userCommentFromFB = new ArrayList<String>();
         userEmailFromFB = new ArrayList<String>();
         userImageFromFB = new ArrayList<String>();
@@ -67,9 +72,12 @@ public class FeedActivity extends AppCompatActivity {
         adapter = new post(userEmailFromFB,userImageFromFB,userCommentFromFB,this);
 
         //Evey time you add sometinh to the list it with the adapter's form
+        //listedeki her bir eleman bizim adapterimizin belirlediği tipte olacak
+        //yani her bir eleman email-resim-yorum içeren bir yapıda olacak
         listView = findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
+        //resimlere yorumlara tıklanınca birşey olmasını istiyorsan listener kullanabilirsin
         // You can set a listener like this  listView.setOnItemClickListener to open another page for a post
         //for ex; for make a picture big
         getDataFromFireBase();
@@ -77,6 +85,12 @@ public class FeedActivity extends AppCompatActivity {
     }
 
     protected void getDataFromFireBase(){
+        //Database içinde nereden alıcaz veriyi onu belirle
+        //Where is the data in fb
+        //-> post
+        //->>child--(email-imageURl-comment)
+        //->>child--(email-imageURl-comment)
+        //...
         DatabaseReference newReferance = firebaseDatabase.getReference("Post");
        newReferance.addValueEventListener(new ValueEventListener() {
            @Override
@@ -90,9 +104,10 @@ public class FeedActivity extends AppCompatActivity {
                    adapter.notifyDataSetChanged();
                }
            }
+           //BİR HATA OLURSA YAPILACAKLAR
            @Override
-           public void onCancelled(DatabaseError databaseError) {//BİR HATA OLURSA YAPIALCAKLAR
-               Toast.makeText(getApplicationContext(),"FB VERİ ÇEKERKEN HATA OLDU",Toast.LENGTH_LONG).show();
+           public void onCancelled(DatabaseError databaseError) {
+               Toast.makeText(getApplicationContext(),"FAİL WHİLE GETTİNG DATA FROM FİREBASE \n"+databaseError.getMessage(),Toast.LENGTH_LONG).show();
            }
        });
 

@@ -71,13 +71,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //BUTTON LİSTENER
+    //BUTTON LİSTENER FOR SINGIN
     public void signIn(View view) {
 
         mAuth.signInWithEmailAndPassword(edit_email.getText().toString(),edit_pass.getText().toString())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                    public void onComplete(@NonNull Task<AuthResult> task) { //İF SUCCED -- İŞLEM SORUNSUZ YAPILIRSA
                         if(task.isSuccessful()){
                             Toast.makeText(getApplicationContext(), "SIGN IN SUCCEED.",
                                     Toast.LENGTH_SHORT).show();
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }).addOnFailureListener(this, new OnFailureListener() {
             @Override
-            public void onFailure(@NonNull Exception e) {
+            public void onFailure(@NonNull Exception e) { //İF NOT SUCCED -- SORUN ÇIKARSA
 
                 if(e != null){
                     Toast.makeText(getApplicationContext(), e.getLocalizedMessage(),
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //BUTTON LİSTENER
+    //BUTTON LİSTENER for SINGUP
 
     public void signUp(View view) {
 
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }).addOnFailureListener(this, new OnFailureListener() {
             @Override
-            public void onFailure(@NonNull Exception e) {                        // fail the sign up
+            public void onFailure(@NonNull Exception e) {    // fail the sign up
                 if(e != null){
                     Toast.makeText(getApplicationContext(), "Authentication failed.\n"+e.getLocalizedMessage(),
                             Toast.LENGTH_SHORT).show();
